@@ -2,12 +2,13 @@ import { StyleSheet } from "react-native";
 
 export const formStyles = StyleSheet.create({
 	registration: {
+		position: 'relative',
 		width: '100%',
 		backgroundColor: "white",
 		borderTopLeftRadius: 25,
 		borderTopRightRadius: 25,
 		paddingTop: 92,
-		
+		paddingBottom: 78,
 		paddingHorizontal: 16
 	
 	},
@@ -44,5 +45,11 @@ export const formStyles = StyleSheet.create({
 		textAlign: 'center',
 		fontSize: 16,
 		color: '#1B4371',
+	},
+	showBth: {
+		position: "absolute",
+		top: 15,
+		right: 15,
+		
 	}
 })
