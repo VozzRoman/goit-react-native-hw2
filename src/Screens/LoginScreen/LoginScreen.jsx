@@ -60,13 +60,13 @@ const LoginScreen = ({isShowKeyboard, setIsShowKeyboard}) => {
     <KeyboardAvoidingView
       style={{ width: "100%" }}
       behavior={Platform.OS == "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={400}
+      keyboardVerticalOffset={Platform.OS === 'android' ? 400 : 0}
 		
     >
       <View
         style={{
           ...formStyles.registration,
-          marginBottom: isShowKeyboard ? -260 : 0, paddingTop: 32, paddingBottom: 144,
+          marginBottom: isShowKeyboard ? -240 : 0, paddingTop: 32, paddingBottom: 144,
         }}
       >
         <Text style={formStyles.formTitle}>Войти</Text>

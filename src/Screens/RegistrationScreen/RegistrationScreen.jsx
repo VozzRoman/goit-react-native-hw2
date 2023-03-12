@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Keyboard,
+  Platform,
 } from "react-native";
 import { styles } from "../../../AppStyle";
 import { Avatar } from "../../components/Avatar/Avatar";
@@ -64,13 +65,13 @@ const RegistrationScreen = ({isShowKeyboard, setIsShowKeyboard}) => {
     <KeyboardAvoidingView
       style={{ width: "100%" }}
       behavior={Platform.OS == "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={400}
+      keyboardVerticalOffset={Platform.OS === 'android' ? 400 : 0}
 		
     >
       <View
         style={{
           ...formStyles.registration,
-          marginBottom: isShowKeyboard ? -190 : 0,
+          marginBottom: isShowKeyboard ? -170 : 0,
         }}
       >
         <Text style={formStyles.formTitle}>Регистрация</Text>
@@ -81,6 +82,8 @@ const RegistrationScreen = ({isShowKeyboard, setIsShowKeyboard}) => {
               ...formStyles.input,
               borderColor: focuse.login ? "#FF6C00" : "#E8E8E8",
             }}
+				
+				keyboardType= 'default'
             placeholder="Логин"
             value={value.login}
 				onChangeText={(value) => setValue(prevState => ({...prevState, login: value}))}
@@ -96,6 +99,7 @@ const RegistrationScreen = ({isShowKeyboard, setIsShowKeyboard}) => {
               ...formStyles.input,
               borderColor: focuse.email ? "#FF6C00" : "#E8E8E8",
             }}
+				keyboardType='email-address'
 				onChangeText={(value) => setValue(prevState => ({...prevState, email: value}))}
             placeholder="Адрес электронной почты"
             onFocus={() => onFocuseHandle("email")}
