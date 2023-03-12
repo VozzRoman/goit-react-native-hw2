@@ -37,8 +37,8 @@ export default function App() {
 	<SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
 
 	<ImageBackground style={styles.imageBg} source={require("./src/img/bg/PhotoBG.jpg")} resizeMode="cover">
-   <RegistrationScreen isShowKeyboard={isShowKeyboard} setIsShowKeyboard={setIsShowKeyboard}/>
-	{/* <LoginScreen isShowKeyboard={isShowKeyboard} setIsShowKeyboard={setIsShowKeyboard} /> */}
+   {/* <RegistrationScreen isShowKeyboard={isShowKeyboard} setIsShowKeyboard={setIsShowKeyboard}/> */}
+	<LoginScreen isShowKeyboard={isShowKeyboard} setIsShowKeyboard={setIsShowKeyboard} />
 	</ImageBackground>
 
 	</SafeAreaView>
