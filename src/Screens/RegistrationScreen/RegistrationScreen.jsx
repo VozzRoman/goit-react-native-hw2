@@ -125,7 +125,7 @@ const RegistrationScreen = ({isShowKeyboard, setIsShowKeyboard}) => {
 			 activeOpacity={0.8}
 			 onPress={showHandlePassword}
 			 >
-				<Text style={{color: '#1B4371', fontSize: 16}}>{isShowPassword ? 'Показать' : 'Не показывать'}</Text>
+				<Text style={{color: '#1B4371', fontSize: 16, fontFamily: "RobotRegular"}}>{isShowPassword ? 'Показать' : 'Не показывать'}</Text>
 			 </TouchableOpacity>
         </View>
         <TouchableOpacity

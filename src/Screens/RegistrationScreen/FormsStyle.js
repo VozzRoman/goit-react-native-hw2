@@ -17,6 +17,7 @@ export const formStyles = StyleSheet.create({
 		fontSize: 30,
 		fontWeight: 500,
 		marginBottom: 32,
+		fontFamily:"RobotMedium",
 		
 	}, 
 	input: {
@@ -27,6 +28,8 @@ export const formStyles = StyleSheet.create({
 		paddingLeft: 16,
 		backgroundColor: '#f4f4f4',
 		borderRadius: 8,
+		fontFamily: 'RobotRegular',
+		color: '#212121',
 	},
 	formButton: {
 		alignItems: 'center',
@@ -40,11 +43,13 @@ export const formStyles = StyleSheet.create({
 	buttonTitle: {
 		fontSize: 16,
 		color: '#fff',
+		fontFamily: 'RobotRegular',
 	},
 	formLink: {
 		textAlign: 'center',
 		fontSize: 16,
 		color: '#1B4371',
+		fontFamily: 'RobotRegular'
 	},
 	showBth: {
 		position: "absolute",
