@@ -3,6 +3,7 @@ import RegistrationScreen from './src/Screens/RegistrationScreen/RegistrationScr
 import { ImageBackground, Keyboard, SafeAreaView, TouchableNativeFeedback } from 'react-native';
 import { styles } from './AppStyle';
 import { useState } from 'react';
+import LoginScreen from './src/Screens/LoginScreen/LoginScreen';
 
 export default function App() {
 	const [isShowKeyboard, setIsShowKeyboard] = useState(false);
@@ -17,6 +18,7 @@ export default function App() {
 
 	<ImageBackground style={styles.imageBg} source={require("./src/img/bg/PhotoBG.jpg")} resizeMode="cover">
    <RegistrationScreen isShowKeyboard={isShowKeyboard} setIsShowKeyboard={setIsShowKeyboard}/>
+	{/* <LoginScreen isShowKeyboard={isShowKeyboard} setIsShowKeyboard={setIsShowKeyboard} /> */}
 	</ImageBackground>
 
 	</SafeAreaView>

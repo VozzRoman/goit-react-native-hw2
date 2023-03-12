@@ -13,26 +13,19 @@ export const avatarStyle = StyleSheet.create({
 			{translateX: -50}
 		]
 	},
-	bthPlus: {
-		
-		color: '#FF6C00',
-	},
+
 	addBth: {
 		position: 'absolute',
-		right: -10,
+		right: -12.5,
 		top: 80,
-		display: 'flex',
-		alignItems: 'center',
+		alignItems:'center',
 		justifyContent: 'center',
-		width: 25,
-		height: 25,
-		padding: 10,
-		backgroundColor: 'red',
+		width:25,
+		height:25,
 		borderRadius: 50,
+		backgroundColor: "#fff",
 		borderWidth: 1,
-		borderColor: '#FF6C00',
-		backgroundColor: '#fff',
-		
+		borderColor: '#E8E8E8',
+	},
 
-	}
 })
