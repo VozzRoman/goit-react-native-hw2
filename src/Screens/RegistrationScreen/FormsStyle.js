@@ -3,13 +3,14 @@ import { StyleSheet } from "react-native";
 export const formStyles = StyleSheet.create({
 	registration: {
 		position: 'relative',
-		width: '100%',
+		
+		width: "100%",
 		backgroundColor: "white",
 		borderTopLeftRadius: 25,
 		borderTopRightRadius: 25,
 		paddingTop: 92,
 		paddingBottom: 78,
-		paddingHorizontal: 16
+		alignItems: 'center'
 	
 	},
 	formTitle: {
@@ -21,7 +22,7 @@ export const formStyles = StyleSheet.create({
 		
 	}, 
 	input: {
-		width: "100%",
+		
 		borderWidth: 1,
 		borderColor: '#E8E8E8',
 		height: 50,
@@ -30,6 +31,8 @@ export const formStyles = StyleSheet.create({
 		borderRadius: 8,
 		fontFamily: 'RobotRegular',
 		color: '#212121',
+		
+		
 	},
 	formButton: {
 		alignItems: 'center',
@@ -38,6 +41,7 @@ export const formStyles = StyleSheet.create({
 		height: 51,
 		backgroundColor: '#FF6C00',
 		marginBottom: 16,
+		
 	
 	},
 	buttonTitle: {

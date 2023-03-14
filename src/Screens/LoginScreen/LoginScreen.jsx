@@ -20,7 +20,7 @@ const initialFocuseState = {
 };
 
 
-const LoginScreen = ({isShowKeyboard, setIsShowKeyboard}) => {
+const LoginScreen = ({isShowKeyboard, setIsShowKeyboard, dimensions}) => {
 	
   const [value, setValue] = useState(initialState);
   const [focuse, setFocuse] = useState(initialFocuseState);
@@ -66,11 +66,15 @@ const LoginScreen = ({isShowKeyboard, setIsShowKeyboard}) => {
       <View
         style={{
           ...formStyles.registration,
-          marginBottom: isShowKeyboard ? -240 : 0, paddingTop: 32, paddingBottom: 144,
+          marginBottom: isShowKeyboard ? -240 : 0, 
+			 paddingTop: 32, 
+			 paddingBottom: 144,
+			//  width: dimensions,
+
         }}
       >
         <Text style={formStyles.formTitle}>Войти</Text>
-        <View style={{ marginBottom: 16 }}>
+        <View style={{ marginBottom: 16, width: dimensions }}>
           <TextInput
             value={value.email}
             style={{
@@ -83,7 +87,7 @@ const LoginScreen = ({isShowKeyboard, setIsShowKeyboard}) => {
              onEndEditing={() => onBlureHandle("email")}
           />
         </View>
-        <View style={{ marginBottom: 43, position: "relative" }}>
+        <View style={{ marginBottom: 43, position: "relative", width: dimensions}}>
           <TextInput
             style={{
               ...formStyles.input,
@@ -106,7 +110,7 @@ const LoginScreen = ({isShowKeyboard, setIsShowKeyboard}) => {
 			 </TouchableOpacity>
         </View>
         <TouchableOpacity
-          style={formStyles.formButton}
+          style={{...formStyles.formButton, width: dimensions}}
           activeOpacity={0.8}
           onPress={hideKeyboard}
         >

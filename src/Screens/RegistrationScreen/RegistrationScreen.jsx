@@ -25,7 +25,7 @@ const initialFocuseState = {
 };
 
 
-const RegistrationScreen = ({isShowKeyboard, setIsShowKeyboard}) => {
+const RegistrationScreen = ({isShowKeyboard, setIsShowKeyboard, dimensions}) => {
 	
   const [value, setValue] = useState(initialState);
   const [focuse, setFocuse] = useState(initialFocuseState);
@@ -76,7 +76,7 @@ const RegistrationScreen = ({isShowKeyboard, setIsShowKeyboard}) => {
       >
         <Text style={formStyles.formTitle}>Регистрация</Text>
 		  <Avatar/>
-        <View style={{ marginBottom: 16 }}>
+        <View style={{ marginBottom: 16, width: dimensions }}>
           <TextInput
             style={{
               ...formStyles.input,
@@ -92,7 +92,7 @@ const RegistrationScreen = ({isShowKeyboard, setIsShowKeyboard}) => {
 				
           />
         </View>
-        <View style={{ marginBottom: 16 }}>
+        <View style={{ marginBottom: 16, width: dimensions }}>
           <TextInput
             value={value.email}
             style={{
@@ -106,7 +106,7 @@ const RegistrationScreen = ({isShowKeyboard, setIsShowKeyboard}) => {
              onEndEditing={() => onBlureHandle("email")}
           />
         </View>
-        <View style={{ marginBottom: 43, position: "relative" }}>
+        <View style={{ marginBottom: 43, position: "relative", width: dimensions }}>
           <TextInput
             style={{
               ...formStyles.input,
@@ -129,7 +129,7 @@ const RegistrationScreen = ({isShowKeyboard, setIsShowKeyboard}) => {
 			 </TouchableOpacity>
         </View>
         <TouchableOpacity
-          style={formStyles.formButton}
+          style={{...formStyles.formButton, width: dimensions}}
           activeOpacity={0.8}
           onPress={hideKeyboard}
         >
