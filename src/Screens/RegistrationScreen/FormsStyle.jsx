@@ -1,6 +1,12 @@
 import { StyleSheet } from "react-native";
 
 export const formStyles = StyleSheet.create({
+	imageBg: {
+		flex: 1,
+		resizeMode: 'contain',
+		alignItems: 'center',
+		justifyContent: 'flex-end',
+	},
 	registration: {
 		position: 'relative',
 		

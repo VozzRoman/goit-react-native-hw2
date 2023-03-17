@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -6,7 +6,11 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Keyboard,
+  ImageBackground,
+  TouchableWithoutFeedback,
+  Dimensions,
 } from "react-native";
+import MainButton from "../../components/Buttons/MainButton/MainButton";
 import { formStyles } from "../RegistrationScreen/FormsStyle";
 // import { useHeaderHeight } from '@react-navigation/elements';
 
@@ -20,14 +24,31 @@ const initialFocuseState = {
 };
 
 
-const LoginScreen = ({isShowKeyboard, setIsShowKeyboard, dimensions}) => {
-	
+
+const LoginScreen = ({navigation}) => {
+
+	console.log(navigation);
+	const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [value, setValue] = useState(initialState);
   const [focuse, setFocuse] = useState(initialFocuseState);
   const [isShowPassword, setIsShowPassword] = useState(true);
+  const [dimensions, setDimensions] = useState(Dimensions.get('window').width - 20 * 2);
+
+  useEffect(() => {
+	const onChange = () => {
+	  const width = Dimensions.get('window').width - 20 * 2;
+	  console.log('width', width)
+	  setDimensions(width);
+	};
+	Dimensions.addEventListener('change', onChange);
+	return () => {
+	  Dimensions.removeEventListener('change', onChange);
+	}
+  }, [])
+
 
   const handleRegistr = () => {
-	console.log('navigate to log');
+	navigation.navigate('Register');
   }
 
   const showHandlePassword = () => {
@@ -36,6 +57,7 @@ const LoginScreen = ({isShowKeyboard, setIsShowKeyboard, dimensions}) => {
 
   const hideKeyboard = () => {
 		setIsShowKeyboard(false);
+		navigation.navigate('Home');
 		Keyboard.dismiss();
 		console.log(value);
 		setValue(initialState);
@@ -54,9 +76,15 @@ const LoginScreen = ({isShowKeyboard, setIsShowKeyboard, dimensions}) => {
       [input]: false,
     });
   };
+  const hideTouchble = () => {
+	setIsShowKeyboard(false);
+	Keyboard.dismiss();
+}
+  
 
   return (
-
+	<TouchableWithoutFeedback onPress={hideTouchble}>
+<ImageBackground style={formStyles.imageBg} source={require("../../img/bg/PhotoBG.jpg")} resizeMode="cover">
     <KeyboardAvoidingView
       style={{ width: "100%" }}
       behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -109,13 +137,9 @@ const LoginScreen = ({isShowKeyboard, setIsShowKeyboard, dimensions}) => {
 				<Text style={{color: '#1B4371', fontSize: 16}}>{isShowPassword ? 'Показать' : 'Не показывать'}</Text>
 			 </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          style={{...formStyles.formButton, width: dimensions}}
-          activeOpacity={0.8}
-          onPress={hideKeyboard}
-        >
-          <Text style={formStyles.buttonTitle}>Войти</Text>
-        </TouchableOpacity>
+   
+
+		<MainButton onPress={hideKeyboard} activeOpacity={0.8} dimension={dimensions} title='Войти' style={20}/>
         <TouchableOpacity
 		  activeOpacity={0.6}
 		  onPress={handleRegistr}
@@ -125,6 +149,8 @@ const LoginScreen = ({isShowKeyboard, setIsShowKeyboard, dimensions}) => {
         </TouchableOpacity>
       </View>
   </KeyboardAvoidingView>
+  </ImageBackground>
+  </TouchableWithoutFeedback>
   );
 };
 
