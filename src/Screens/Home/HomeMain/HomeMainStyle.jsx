@@ -7,10 +7,9 @@ export const homeStyle = StyleSheet.create({
 			backgroundColor: "#fff",
 		},
 		headerStyles: {
-			headerShown: true,
-			headerTitle: "Публикации",
-			headerTitleStyle: { fontSize: 17, fontFamily: "RobotMedium" },
-			headerTitleAlign: "center",
-		},
+			headerTitleAlign: 'center',
+			headerTitleStyle: {fontSize: 17},
+		}
+	
 		
 })

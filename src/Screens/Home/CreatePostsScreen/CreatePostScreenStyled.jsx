@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { transparent } from "react-native";
+import { Platform, StyleSheet } from "react-native";
+
 
 
 export const createPostScreenStyle = StyleSheet.create({
@@ -14,13 +14,13 @@ export const createPostScreenStyle = StyleSheet.create({
 		imageBox: {
 			justifyContent: 'center',
 			alignItems: 'center',
-			width: "100%",
+			// width: "100%",
 			height: 240,
 			backgroundColor: '#F6F6F6',
 			borderWidth: 1,
 			borderColor: '#E8E8E8',
-			borderRadius: 8,
-			marginBottom: 8,
+			
+			
 			
 		},
 		loadBth: {
@@ -43,8 +43,16 @@ export const createPostScreenStyle = StyleSheet.create({
 			justifyContent: 'center',
 			borderRadius: 100,
 			height: 51,
-			backgroundColor: '#F6F6F6',
-			marginBottom: 70,
+			
+			...Platform.select({
+				android: {
+					marginBottom: 70,
+				},
+				ios: {
+					marginBottom: 10,
+				}
+			}),
+			
 			marginTop: 16,
 			
 		
@@ -61,7 +69,7 @@ export const createPostScreenStyle = StyleSheet.create({
 			borderRadius: 20,
 			alignItems: "center",
 			justifyContent: "center",
-			backgroundColor: '#F6F6F6',
+			
 		},
 		
 		iconLocation: {
@@ -69,6 +77,20 @@ export const createPostScreenStyle = StyleSheet.create({
 			top: 10,
 			
 		
-		}
+		},
+		camerBox: {
+			borderRadius: 8,
+			overflow: 'hidden',
+			height: 240,
+			marginBottom: 10
+		},
+		pictureDoneContainer: {
+			position: 'absolute',
+			width: '100%',
+			top: 0,
+			left: 0,
+			borderRadius: 8,
+		},
+	
 
 })

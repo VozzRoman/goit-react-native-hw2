@@ -5,8 +5,8 @@ export const stylesAvatar = StyleSheet.create({
 		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
-		marginHorizontal: 20,
-		marginVertical: 20,
+		
+		marginVertical: 40,
 	},
 	userName: {
 		color: '#212121',

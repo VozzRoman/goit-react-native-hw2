@@ -10,7 +10,7 @@ import SignOutBth from "../../../components/Buttons/SignOutBth/SignOutBth";
 import BackBth from "../../../components/Buttons/Back/BackBth";
 import { homeStyle } from "./HomeMainStyle";
 
-const MainTab = createBottomTabNavigator();
+export const MainTab = createBottomTabNavigator();
 
 const HomeMain = ({ navigation }) => {
   return (
@@ -24,11 +24,8 @@ const HomeMain = ({ navigation }) => {
         options={{
           tabBarActiveTintColor: "#FF6C00",
           tabBarInactiveTintColor: "#fff",
-          headerShown: true,
+          headerShown: false,
           ...homeStyle.headerStyles,
-          headerRight: () => (
-            <SignOutBth onPress={() => navigation.navigate("Login")} />
-          ),
           tabBarLabel: "",
           tabBarIcon: ({ focused, color }) => (
             <View style={{ ...styles.tabBth, backgroundColor: color }}>
@@ -47,6 +44,8 @@ const HomeMain = ({ navigation }) => {
         options={{
           tabBarActiveTintColor: "#FF6C00",
           tabBarInactiveTintColor: "#fff",
+			 headerTitle: "Создать Публикацию",
+			 
 			 ...homeStyle.headerStyles,
           headerLeft: () => (
             <BackBth onPress={() => navigation.navigate("Posts")} />
