@@ -10,7 +10,9 @@ import {
   TouchableWithoutFeedback,
   Dimensions,
 } from "react-native";
+import { useDispatch } from "react-redux";
 import MainButton from "../../components/Buttons/MainButton/MainButton";
+import { authSignInUser } from "../../redux/auth/authOperations";
 import { formStyles } from "../RegistrationScreen/FormsStyle";
 // import { useHeaderHeight } from '@react-navigation/elements';
 
@@ -26,6 +28,8 @@ const initialFocuseState = {
 
 
 const LoginScreen = ({navigation}) => {
+
+	const dispatch = useDispatch();
 
 	console.log(navigation);
 	const [isShowKeyboard, setIsShowKeyboard] = useState(false);
@@ -60,6 +64,7 @@ const LoginScreen = ({navigation}) => {
 		navigation.navigate('Home');
 		Keyboard.dismiss();
 		console.log(value);
+		dispatch(authSignInUser(value))
 		setValue(initialState);
   }
 

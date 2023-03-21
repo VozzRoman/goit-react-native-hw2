@@ -13,7 +13,8 @@ import {
   TouchableWithoutFeedback,
   Dimensions,
 } from "react-native";
-
+import { useDispatch } from "react-redux";
+import { authSignUpUser} from "../../redux/auth/authOperations";
 import { Avatar } from "../../components/Avatar/Avatar";
 import { formStyles } from "./FormsStyle";
 import MainButton from "../../components/Buttons/MainButton/MainButton";
@@ -32,7 +33,7 @@ const initialFocuseState = {
 
 const RegistrationScreen = ({ navigation }) => {
 
-	
+	const dispatch = useDispatch();
 	
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [value, setValue] = useState(initialState);
@@ -65,10 +66,12 @@ const RegistrationScreen = ({ navigation }) => {
 
   const hideKeyboard = () => {
     setIsShowKeyboard(false);
-	 navigation.navigate("Home");
     Keyboard.dismiss();
     console.log(value);
     setValue(initialState);
+	 dispatch(authSignUpUser(value));
+	 navigation.navigate("Login");
+
   };
 
   const onFocuseHandle = (input) => {
