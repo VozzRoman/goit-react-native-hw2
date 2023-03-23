@@ -16,7 +16,8 @@ export const formStyles = StyleSheet.create({
 		borderTopRightRadius: 25,
 		paddingTop: 92,
 		paddingBottom: 78,
-		alignItems: 'center'
+		alignItems: 'center',
+		paddingHorizontal: 20,
 	
 	},
 	formTitle: {

@@ -31,12 +31,7 @@ const DefaultScreen = ({route, navigation}) => {
 		});
 	}
 
-	
-	
 
-	// const handleSignOut = () => {
-	// 	navigation.navigate("Login");
-	// }
 
   return (
 	 <View style={postScreenStyle.container}>

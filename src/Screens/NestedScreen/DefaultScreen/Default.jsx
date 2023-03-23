@@ -9,6 +9,7 @@ const DefaultScreen = ({route, navigation}) => {
 	const [posts, setPosts] = useState([]);
 
 	
+	
 
 	useEffect(() => {
 		if(route.params){

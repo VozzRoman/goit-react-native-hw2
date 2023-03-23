@@ -38,17 +38,17 @@ const LoginScreen = ({navigation}) => {
   const [isShowPassword, setIsShowPassword] = useState(true);
   const [dimensions, setDimensions] = useState(Dimensions.get('window').width - 20 * 2);
 
-  useEffect(() => {
-	const onChange = () => {
-	  const width = Dimensions.get('window').width - 20 * 2;
-	  console.log('width', width)
-	  setDimensions(width);
-	};
-	Dimensions.addEventListener('change', onChange);
-	return () => {
-	  Dimensions.removeEventListener('change', onChange);
-	}
-  }, [])
+//   useEffect(() => {
+// 	const onChange = () => {
+// 	  const width = Dimensions.get('window').width - 20 * 2;
+// 	//   console.log('width', width)
+// 	  setDimensions(width);
+// 	};
+// 	Dimensions.addEventListener('change', onChange);
+// 	return () => {
+// 	  Dimensions.removeEventListener('change', onChange);
+// 	}
+//   }, [])
 
 
   const handleRegistr = () => {
@@ -61,9 +61,9 @@ const LoginScreen = ({navigation}) => {
 
   const hideKeyboard = () => {
 		setIsShowKeyboard(false);
-		navigation.navigate('Home');
+		// navigation.navigate('Home');
 		Keyboard.dismiss();
-		console.log(value);
+		// console.log(value);
 		dispatch(authSignInUser(value))
 		setValue(initialState);
   }
@@ -107,7 +107,7 @@ const LoginScreen = ({navigation}) => {
         }}
       >
         <Text style={formStyles.formTitle}>Войти</Text>
-        <View style={{ marginBottom: 16, width: dimensions }}>
+        <View style={{ marginBottom: 16, width: "100%"}}>
           <TextInput
             value={value.email}
             style={{
@@ -120,7 +120,7 @@ const LoginScreen = ({navigation}) => {
              onEndEditing={() => onBlureHandle("email")}
           />
         </View>
-        <View style={{ marginBottom: 43, position: "relative", width: dimensions}}>
+        <View style={{ marginBottom: 43, position: "relative", width: "100%" }}>
           <TextInput
             style={{
               ...formStyles.input,
@@ -143,8 +143,9 @@ const LoginScreen = ({navigation}) => {
 			 </TouchableOpacity>
         </View>
    
-
-		<MainButton onPress={hideKeyboard} activeOpacity={0.8} dimension={dimensions} title='Войти' style={20}/>
+				<View style={{width: '100%'}}>
+		<MainButton onPress={hideKeyboard} activeOpacity={0.8}  title='Войти' style={20}/>
+				</View>
         <TouchableOpacity
 		  activeOpacity={0.6}
 		  onPress={handleRegistr}

@@ -45,10 +45,9 @@ const HomeMain = ({ navigation }) => {
           tabBarActiveTintColor: "#FF6C00",
           tabBarInactiveTintColor: "#fff",
 			 headerTitle: "Создать Публикацию",
-			 
 			 ...homeStyle.headerStyles,
           headerLeft: () => (
-            <BackBth onPress={() => navigation.navigate("Posts")} />
+            <BackBth onPress={() => navigation.navigate("DeafultScreen")} />
           ),
           tabBarLabel: "",
           tabBarIcon: ({ focused, color }) => (

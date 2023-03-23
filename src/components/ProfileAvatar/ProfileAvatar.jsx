@@ -3,7 +3,12 @@ import React from 'react'
 import { View, Text, Image } from 'react-native';
 import { stylesAvatar } from './ProfileAvatarStyled';
 
+
+
+
 const ProfileAvatar = ({photo, name, mail}) => {
+
+	
   return (
 	 <View style={stylesAvatar.container}>
 		<View>

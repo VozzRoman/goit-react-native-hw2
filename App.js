@@ -1,16 +1,20 @@
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./AppStyle";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-//Navigation-------
-import { NavigationContainer } from "@react-navigation/native";
-import { useRoute } from "./src/utils/routing";
+
 import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
-import { auth } from "./src/firebase/config";
-import { onAuthStateChanged } from "firebase/auth";
+
+
+import './src/firebase/config';
+import { Main } from "./src/components/Main";
+
+
+
+
 
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -40,10 +44,11 @@ import { onAuthStateChanged } from "firebase/auth";
 
 // }
 
-export default function App() {
-const [dataUser, setDataUser] = useState(null);
 
-  
+export default function App() {
+
+
+ 
 
   const [fontsLoaded] = useFonts({
     RobotoBold: require("./assets/Fonts/Roboto-Bold.ttf"),
@@ -51,10 +56,10 @@ const [dataUser, setDataUser] = useState(null);
     RobotRegular: require("./assets/Fonts/Roboto-Regular.ttf"),
   });
 
-  onAuthStateChanged(auth, (user) => setDataUser(user));
+ 
 
-  const routing = useRoute(dataUser);
-  console.log('app-log',dataUser);
+ 
+ 
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
@@ -69,7 +74,7 @@ const [dataUser, setDataUser] = useState(null);
   return (
     <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
 		<Provider store={store}>
-      <NavigationContainer>{routing}</NavigationContainer>
+      <Main/>
 		</Provider>
 
 

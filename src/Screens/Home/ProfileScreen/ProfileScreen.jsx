@@ -8,7 +8,19 @@ import {
 	ImageBackground,
  } from "react-native";
 import SignOutBth from '../../../components/Buttons/SignOutBth/SignOutBth';
+import { useDispatch, useSelector } from 'react-redux';
+import { singOutUser } from '../../../redux/auth/authOperations';
+
+
 const ProfileScreen = ({navigation}) => {
+const dispatch = useDispatch();
+	const userData = useSelector(state => state);
+	console.log('userProfileState',userData.auth.login);
+
+	const handleSingOut = () => {
+		dispatch(singOutUser());
+	}
+
   return (
 	
 	<ImageBackground
@@ -20,10 +32,10 @@ const ProfileScreen = ({navigation}) => {
 		 <View
 			style={formStyles.registration}
 		 >
-			<Text style={formStyles.formTitle}>Natali Romanova</Text>
+			<Text style={formStyles.formTitle}>{userData.auth.login}</Text>
 			<Avatar />
 			<View style={profileScreenStyle.signOutButton}>
-			<SignOutBth onPress={() => navigation.navigate('Login')}/>
+			<SignOutBth onPress={handleSingOut}/>
 			</View>
 			
 		

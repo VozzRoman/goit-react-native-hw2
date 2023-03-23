@@ -20,18 +20,21 @@ import { formStyles } from "./FormsStyle";
 import MainButton from "../../components/Buttons/MainButton/MainButton";
 // import { useHeaderHeight } from '@react-navigation/elements';
 
+
 const initialState = {
   login: "",
   email: "",
   password: "",
 };
 const initialFocuseState = {
-  login: false,
   email: false,
   password: false,
+  login: false,
 };
 
 const RegistrationScreen = ({ navigation }) => {
+
+	
 
 	const dispatch = useDispatch();
 	
@@ -46,19 +49,19 @@ const RegistrationScreen = ({ navigation }) => {
     navigation.navigate("Login");
   };
 
-  
 
-  useEffect(() => {
-    const onChange = () => {
-      const width = Dimensions.get("window").width - 20 * 2;
-      console.log("width", width);
-      setDimensions(width);
-    };
-    Dimensions.addEventListener("change", onChange);
-    return () => {
-      Dimensions.removeEventListener("change", onChange);
-    };
-  }, []);
+
+//   useEffect(() => {
+//     const onChange = () => {
+//       const width = Dimensions.get("window").width - 20 * 2;
+//       console.log("width", width);
+//       setDimensions(width);
+//     };
+//     Dimensions.addEventListener("change", onChange);
+//     return () => {
+//       Dimensions.removeEventListener("change", onChange);
+//     };
+//   }, []);
 
   const showHandlePassword = () => {
     setIsShowPassword((prevState) => !prevState);
@@ -67,7 +70,7 @@ const RegistrationScreen = ({ navigation }) => {
   const hideKeyboard = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    console.log(value);
+   //  console.log(value);
     setValue(initialState);
 	 dispatch(authSignUpUser(value));
 	 navigation.navigate("Login");
@@ -113,7 +116,7 @@ const RegistrationScreen = ({ navigation }) => {
           >
             <Text style={formStyles.formTitle}>Регистрация</Text>
             <Avatar />
-            <View style={{ marginBottom: 16, width: dimensions }}>
+            <View style={{ marginBottom: 16, width: "100%" }}>
               <TextInput
                 style={{
                   ...formStyles.input,
@@ -129,7 +132,7 @@ const RegistrationScreen = ({ navigation }) => {
                 onEndEditing={() => onBlureHandle("login")}
               />
             </View>
-            <View style={{ marginBottom: 16, width: dimensions }}>
+            <View style={{ marginBottom: 16,  width: "100%", }}>
               <TextInput
                 value={value.email}
                 style={{
@@ -149,7 +152,7 @@ const RegistrationScreen = ({ navigation }) => {
               style={{
                 marginBottom: 43,
                 position: "relative",
-                width: dimensions,
+                width: "100%",
               }}
             >
               <TextInput
@@ -183,7 +186,9 @@ const RegistrationScreen = ({ navigation }) => {
                 </Text>
               </TouchableOpacity>
             </View>
-				<MainButton onPress={hideKeyboard} activeOpacity={0.8} dimension={dimensions} title='Зарегистрироваться' style={20}/>
+				<View style={{width: "100%"}}>
+				<MainButton onPress={hideKeyboard} activeOpacity={0.8} title='Зарегистрироваться' style={20}/>
+				</View>
             <TouchableOpacity activeOpacity={0.6} onPress={handleLogIn}>
               <Text style={formStyles.formLink}>Уже есть аккаунт? Войти</Text>
             </TouchableOpacity>

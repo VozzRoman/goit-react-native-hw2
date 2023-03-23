@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { Children, useEffect, useRef } from 'react'
 import { View, Text, Image } from 'react-native'
 import { TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { TextInput } from 'react-native-paper';
@@ -10,6 +10,12 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 import {Camera} from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import * as Location from 'expo-location';
+import { uuidv4 } from '@firebase/util';
+//----fireBase
+import db from '../../../firebase/config';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
+const storage = getStorage(db);
+// import { async } from '@firebase/util';
 
 
 const initialValue = {
@@ -106,6 +112,35 @@ const CreatePostScreen = ({navigation}) => {
 	const handleKeyboard = () => {
 		setShowKeyboard(true);
 	}
+//-----Загрузка фото на серевер-----//
+
+const uploadPhotToServer = async () => {
+	const response = await fetch(photo); //бере фото из стейта
+	const file = await response.blob(); // формат для сервера
+	const postId = uuidv4();
+	// console.log(postId);
+	// console.log(file);
+
+	// const mountainsRef = await ref(storage, file);
+	// console.log(mountainsRef);
+
+	//Загрузить файлы---(photo)
+	const picture = await ref(storage, `picture/${postId}`); //папка `picture/ куда будет загрузка фото с Айди ${postId}
+	console.log(picture);
+	const sendPic = await uploadBytes(picture, file) // загрузка
+	console.log(sendPic);
+
+	//Скачать данные через URL--(photo)
+
+	const pathPhotoReference = await getDownloadURL(ref(storage, `picture/${postId}`));
+	console.log(pathPhotoReference);
+
+
+	
+
+}
+
+
   return (
 	 <View style={createPostScreenStyle.container}>
 		 <KeyboardAvoidingView
@@ -133,7 +168,7 @@ const CreatePostScreen = ({navigation}) => {
 
 
 			<TouchableOpacity activeOpacity={0.6}>
-				<Text style={createPostScreenStyle.loadBth}>Загрузите фото</Text>
+				<Text style={createPostScreenStyle.loadBth} onPress={uploadPhotToServer}>Загрузите фото</Text>
 			</TouchableOpacity>
 			<View style={createPostScreenStyle.labelInput}>
 				<TextInput value={value.name} onChangeText={(value) => setValue((prevState)=> ({...prevState, name: value}))} onFocus={handleKeyboard} style={createPostScreenStyle.input} placeholderTextColor='#BDBDBD' placeholder='Название...'/>

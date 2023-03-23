@@ -13,12 +13,16 @@ import DefaultScreen from "../../NestedScreen/DefaultScreen/DefaultScreen";
 import MapScreen from "../../NestedScreen/MapScreen/MapsScreen";
 import { MainTab } from "../HomeMain/HomeMain";
 import { postScreenStyle } from "./PostScreenStyled";
-
 const NestedScreen = createNativeStackNavigator();
-
+import { useSelector } from "react-redux";
+import { userSelector } from "../../../redux/auth/authSlice";
 const PostScreen = ({navigation}) => {
 
-
+	const userSel = useSelector(userSelector);
+	
+	 console.log('initialStatePostScreen', userSel);
+	
+	 
 
 return (
 	
@@ -26,6 +30,7 @@ return (
 		<NestedScreen.Screen options={{
 			...postScreenStyle.headersStyle,
 			headerTitle: "Публикации",
+			headerShown: true,
 			headerRight: () => (
             <SignOutBth onPress={() => navigation.navigate("Login")} />
           ),
