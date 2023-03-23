@@ -13,8 +13,13 @@ import * as Location from "expo-location";
 import { uuidv4 } from "@firebase/util";
 //----fireBase
 import db from "../../../firebase/config";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
+import { getFirestore } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
+import { useSelector } from "react-redux";
 const storage = getStorage(db);
+const fierStore = getFirestore(db);
+console.log(fierStore);
 // import { async } from '@firebase/util';
 
 const initialValue = {
@@ -34,6 +39,10 @@ const CreatePostScreen = ({ navigation }) => {
   const [value, setValue] = useState(initialValue);
   const [activeBth, setActiveBth] = useState(false);
   const [isLocation, setIsLocation] = useState(null);
+
+  const user = useSelector(state => state);
+  console.log(user.auth.login);
+  console.log(user.auth.userId);
 
   useEffect(() => {
     (async () => {
@@ -90,6 +99,7 @@ const CreatePostScreen = ({ navigation }) => {
   };
 
   const sendPhoto = () => {
+	createData();
     console.log(navigation);
     navigation.navigate("DeafultScreen", { photo, value, isLocation });
     console.log(value);
@@ -99,6 +109,29 @@ const CreatePostScreen = ({ navigation }) => {
   const handleKeyboard = () => {
     setShowKeyboard(true);
   };
+
+
+  //-----Создание обьекта и загрузка его на сервер-----//
+
+  const createData = async () => {
+	const photoFromServer = await uploadPhotToServer();
+	
+		try{
+			const docRef = await addDoc(collection(fierStore, 'posts'),{
+				photo: photoFromServer,
+				name: value.name,
+				place: value.place,
+				location: isLocation.coords,
+				userName: user.auth.login,
+				id: user.auth.userId
+			})
+			console.log(docRef)
+		} catch (e) {
+			console.error('Error adding object', e);
+		}
+		
+  }
+
   //-----Загрузка фото на серевер-----//
 
   const uploadPhotToServer = async () => {
@@ -123,6 +156,7 @@ const CreatePostScreen = ({ navigation }) => {
       ref(storage, `picture/${postId}`)
     );
     console.log(pathPhotoReference);
+	 return pathPhotoReference; //возврощяем фото для создания обьекта
   };
 
   return (
@@ -166,7 +200,7 @@ const CreatePostScreen = ({ navigation }) => {
           <TouchableOpacity activeOpacity={0.6}>
             <Text
               style={createPostScreenStyle.loadBth}
-              onPress={uploadPhotToServer}
+              
             >
               Загрузите фото
             </Text>

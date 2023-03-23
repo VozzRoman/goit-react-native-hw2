@@ -6,22 +6,21 @@ import MapView from 'react-native-maps';
 
 const MapScreen = ({route}) => {
 	const data = route.params
-	// console.log(route.params);
-	// console.log(data.isLocation);
+	console.log(data.location);
   return (
 	 <View style={mapStyle.container}>
 	
-				<MapView key={data.isLocation.coords.latitude} 
+				<MapView key={data.location.latitude} 
 				style={{flex: 1}}
 				initialRegion={{
-					latitude: data.isLocation.coords.latitude,
-					longitude: data.isLocation.coords.longitude,
+					latitude: data.location.latitude,
+					longitude: data.location.longitude,
 					latitudeDelta: 0.001,
 					longitudeDelta: 0.006,
 				}}
 				>
 					<Marker 
-					coordinate={{latitude: data.isLocation.coords.latitude, longitude: data.isLocation.coords.longitude}}
+					coordinate={{latitude: data.location.latitude, longitude: data.location.longitude}}
 					title='Место фото'
 					/>
 				</MapView>
