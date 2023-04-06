@@ -31,8 +31,9 @@ const LoginScreen = ({navigation}) => {
 
 	const dispatch = useDispatch();
 
-	console.log(navigation);
-	const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+	// console.log(navigation);
+const [error, setError] = useState('');
+const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [value, setValue] = useState(initialState);
   const [focuse, setFocuse] = useState(initialFocuseState);
   const [isShowPassword, setIsShowPassword] = useState(true);
@@ -51,6 +52,38 @@ const LoginScreen = ({navigation}) => {
 //   }, [])
 
 
+    //---------------Validation----------------//
+	 const isValidObject = (obj) => {
+		return Object.values(obj).every(value => value.trim())
+	  }
+
+	 const isValidateEmail = (value) => {
+		const regx = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+		return regx.test(value);
+	}
+	const updateError = (error, stateUpdater) => {
+		stateUpdater(error);
+		setTimeout(() => {
+			stateUpdater('');
+		}, 2500);
+	}
+	
+	
+	
+	
+	  const isValidForm = () => {
+		if(!isValidObject(value)) 
+		return updateError('Required all fields!', setError)
+		if(!isValidateEmail(value.email)) return updateError('Invalid email!', setError)
+		if(!value.password.trim() || value.password.length < 6) 
+		return updateError('Password must have 6 or more digits', setError)
+		return true;
+	  }
+	
+	
+	  //----------------------validation---------------------------//
+
+
   const handleRegistr = () => {
 	navigation.navigate('Register');
   }
@@ -60,12 +93,14 @@ const LoginScreen = ({navigation}) => {
   }
 
   const hideKeyboard = () => {
+	if(isValidForm()) {
 		setIsShowKeyboard(false);
 		// navigation.navigate('Home');
 		Keyboard.dismiss();
 		// console.log(value);
 		dispatch(authSignInUser(value))
 		setValue(initialState);
+	}
   }
 
   const onFocuseHandle = (input) => {
@@ -108,6 +143,7 @@ const LoginScreen = ({navigation}) => {
       >
         <Text style={formStyles.formTitle}>Войти</Text>
         <View style={{ marginBottom: 16, width: "100%"}}>
+		  {error ? <Text style={{position:'absolute', top: -25, color: 'red', fontSize: 14, textAlign: 'center', paddingBottom: 10}}>{error}</Text> : null}
           <TextInput
             value={value.email}
             style={{

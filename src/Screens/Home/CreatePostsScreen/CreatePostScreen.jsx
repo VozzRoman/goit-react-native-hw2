@@ -39,6 +39,8 @@ const CreatePostScreen = ({ navigation }) => {
   const [value, setValue] = useState(initialValue);
   const [activeBth, setActiveBth] = useState(false);
   const [isLocation, setIsLocation] = useState(null);
+ 
+ 
 
   const user = useSelector(state => state);
   console.log(user.auth.login);
@@ -68,8 +70,6 @@ const CreatePostScreen = ({ navigation }) => {
   const onCameraReady = () => {
     setIsCameraReady(true);
   };
-
-  // const camerRef = useRef(null);
 
   const handleTakePhoto = async () => {
     try {
@@ -101,7 +101,9 @@ const CreatePostScreen = ({ navigation }) => {
   const sendPhoto = () => {
 	createData();
     console.log(navigation);
-    navigation.navigate("DeafultScreen", { photo, value, isLocation });
+    navigation.navigate("DeafultScreen", {
+		
+	 });
     console.log(value);
 
     setValue(initialValue);
@@ -117,15 +119,17 @@ const CreatePostScreen = ({ navigation }) => {
 	const photoFromServer = await uploadPhotToServer();
 	
 		try{
-			const docRef = await addDoc(collection(fierStore, 'posts'),{
+	
+			await addDoc(collection(fierStore, 'posts'),{
 				photo: photoFromServer,
 				name: value.name,
 				place: value.place,
 				location: isLocation.coords,
 				userName: user.auth.login,
-				id: user.auth.userId
+				idUser: user.auth.userId,
+				
 			})
-			console.log(docRef)
+			
 		} catch (e) {
 			console.error('Error adding object', e);
 		}

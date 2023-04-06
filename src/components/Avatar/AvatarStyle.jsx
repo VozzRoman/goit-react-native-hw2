@@ -11,7 +11,12 @@ export const avatarStyle = StyleSheet.create({
 		borderRadius: 16,
 		transform: [
 			{translateX: -50}
-		]
+		],
+		backgroundColor: 'gray',
+		alignItems: 'center',
+		justifyContent: 'center',
+		overflow: 'hidden',
+
 	},
 
 	addBth: {
@@ -27,5 +32,9 @@ export const avatarStyle = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: '#E8E8E8',
 	},
+	textAva: {
+		fontSize: 40,
+		fontWeight: 700,
+	}
 
 })

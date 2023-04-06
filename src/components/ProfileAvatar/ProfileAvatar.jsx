@@ -6,13 +6,14 @@ import { stylesAvatar } from './ProfileAvatarStyled';
 
 
 
-const ProfileAvatar = ({photo, name, mail}) => {
+const ProfileAvatar = ({photo, name, mail, title}) => {
 
 	
   return (
 	 <View style={stylesAvatar.container}>
-		<View>
-		<Image style={{width: 70, height: 70, marginRight: 10}} source={require("../../img/svg/ava.png")}></Image>
+		<View style={stylesAvatar.avaBox}>
+		<Image style={{position: 'absolute',	width: 70, height: 70, }}  source={{uri: photo}}></Image>
+		<Text style={{fontSize: 40, fontWeight: 700}}>{title}</Text>
 		</View>
 
 		<View>

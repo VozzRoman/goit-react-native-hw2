@@ -17,6 +17,8 @@ import PostScreen from '../Screens/Home/PostsScreen/PostScreen';
 import CreatePostScreen from '../Screens/Home/CreatePostsScreen/CreatePostScreen';
 import ProfileScreen from '../Screens/Home/ProfileScreen/ProfileScreen';
 import HomeMain from '../Screens/Home/HomeMain/HomeMain';
+import CommentsScreen from '../Screens/NestedScreen/CommentsScreen/CommentsScreen';
+import { HeaderTitle } from '@react-navigation/elements';
 
 
 
@@ -34,9 +36,20 @@ export const useRoute = (isAuth) => {
 			</AuthStack.Navigator> 
 	} 
 		
-	return <HomeMain/>
-	
+	return <AuthStack.Navigator>
+	<AuthStack.Screen options={{headerShown: false}} name='Home' component={HomeMain}/>
+	<AuthStack.Screen options={{
+		headerShown: true,
+		title: 'Комментари',
+		headerTitleAlign: 'center',
+		headerTitleStyle: {fontSize: 17}
 
+		
+		
+		}} name='CommentScreen' component={CommentsScreen}/>
+
+	
+	 </AuthStack.Navigator>
 }
 
 

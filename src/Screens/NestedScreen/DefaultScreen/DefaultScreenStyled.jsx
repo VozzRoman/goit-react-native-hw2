@@ -39,6 +39,7 @@ export const postScreenStyle = StyleSheet.create({
 			flexDirection: 'row',
 			justifyContent: 'space-between',
 			marginBottom: 32,
+			
 		 },
 		 iconMessage: {
 			marginRight: 5,

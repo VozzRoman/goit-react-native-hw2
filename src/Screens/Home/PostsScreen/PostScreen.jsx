@@ -7,6 +7,7 @@
 // import ProfileAvatar from '../../../components/ProfileAvatar/ProfileAvatar';
 // import { FlatList } from 'react-native-gesture-handler';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import SignOutBth from "../../../components/Buttons/SignOutBth/SignOutBth";
 import CommentsScreen from "../../NestedScreen/CommentsScreen/CommentsScreen";
 import DefaultScreen from "../../NestedScreen/DefaultScreen/DefaultScreen";
@@ -14,13 +15,19 @@ import MapScreen from "../../NestedScreen/MapScreen/MapsScreen";
 import { MainTab } from "../HomeMain/HomeMain";
 import { postScreenStyle } from "./PostScreenStyled";
 const NestedScreen = createNativeStackNavigator();
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userSelector } from "../../../redux/auth/authSlice";
+import { TabRouter } from "@react-navigation/native";
+import { singOutUser } from "../../../redux/auth/authOperations";
 const PostScreen = ({navigation}) => {
-
+	
+const dispatch = useDispatch()
 	const userSel = useSelector(userSelector);
 	
-	 console.log('initialStatePostScreen', userSel);
+	//  console.log('initialStatePostScreen', userSel);
+	const handleSingOut = () => {
+		dispatch(singOutUser());
+	}
 	
 	 
 
@@ -32,15 +39,20 @@ return (
 			headerTitle: "Публикации",
 			headerShown: true,
 			headerRight: () => (
-            <SignOutBth onPress={() => navigation.navigate("Login")} />
+            <SignOutBth onPress={handleSingOut} />
           ),
 		}} 
 			name="DeafultScreen" 
 			component={DefaultScreen}/>
-		<NestedScreen.Screen options={{
+
+		
+		{/* <NestedScreen.Screen options={{
 			...postScreenStyle.headersStyle,
 			headerTitle: "Комментарии",
-		}} name="CommentScreen" component={CommentsScreen}/>
+		}} name="CommentScreen" component={CommentsScreen}/> */}
+		
+
+
 		<NestedScreen.Screen options={{
 			...postScreenStyle.headersStyle,
 			headerTitle: "Карта",

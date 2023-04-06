@@ -7,7 +7,10 @@ export const authSlice = createSlice({
   initialState: {
     userId: null,
     login: null,
+	 userEail: null,
     stateChange: false,
+	 avatarImage: null,
+	 
   },
   reducers: {
     updateUserProfile: (state, { payload }) => {
@@ -16,8 +19,20 @@ export const authSlice = createSlice({
         ...state,
         userId: payload.userId,
         login: payload.login,
+		  userEail: payload.userEail,
+		  avatarImage: payload.avatarImage,
       };
     },
+	 authSignIn: (state, {payload}) => {
+		console.log("authSignInProfile-payload===>", payload);
+		return {
+			...state,
+			login: payload.login,
+			userEail: payload.userEail,
+			avatarImage: payload.avatarImage,
+		}
+
+	 },
     authStateChange: (state, { payload }) => {
       console.log("authStateChange-payload===>", payload);
       return {
@@ -33,6 +48,7 @@ export const authSlice = createSlice({
       };
     },
 
+
     // updateUserProfile(state, actions) {
     // 	state.userId = actions.payload.userId;
     // 	state.login = actions.payload.login;
@@ -40,5 +56,7 @@ export const authSlice = createSlice({
   },
 });
 console.log("authSlice", authSlice);
+
+export const {updateUserProfile} = authSlice.actions;
 
 export default authSlice.reducer;

@@ -6,7 +6,7 @@ import MapView from 'react-native-maps';
 
 const MapScreen = ({route}) => {
 	const data = route.params
-	console.log(data.location);
+	// console.log('dataLocation', data.location);
   return (
 	 <View style={mapStyle.container}>
 	

@@ -10,9 +10,14 @@ import SignOutBth from "../../../components/Buttons/SignOutBth/SignOutBth";
 import BackBth from "../../../components/Buttons/Back/BackBth";
 import { homeStyle } from "./HomeMainStyle";
 
+
 export const MainTab = createBottomTabNavigator();
 
+
+
 const HomeMain = ({ navigation }) => {
+
+
   return (
     <MainTab.Navigator
       screenOptions={{
@@ -27,6 +32,7 @@ const HomeMain = ({ navigation }) => {
           headerShown: false,
           ...homeStyle.headerStyles,
           tabBarLabel: "",
+			
           tabBarIcon: ({ focused, color }) => (
             <View style={{ ...styles.tabBth, backgroundColor: color }}>
               <Feather
@@ -36,18 +42,21 @@ const HomeMain = ({ navigation }) => {
               />
             </View>
           ),
+		
         }}
         name="Posts"
         component={PostScreen}
+		  
       />
       <MainTab.Screen
         options={{
+			
           tabBarActiveTintColor: "#FF6C00",
           tabBarInactiveTintColor: "#fff",
 			 headerTitle: "Создать Публикацию",
 			 ...homeStyle.headerStyles,
           headerLeft: () => (
-            <BackBth onPress={() => navigation.navigate("DeafultScreen")} />
+            <BackBth onPress={() => navigation.navigate("Posts")} />
           ),
           tabBarLabel: "",
           tabBarIcon: ({ focused, color }) => (
@@ -59,7 +68,7 @@ const HomeMain = ({ navigation }) => {
               />
             </View>
           ),
-			 tabBarStyle: {display: 'none'},
+			 tabBarStyle: {display: 'none'}
         }}
         name="CreatePosts"
         component={CreatePostScreen}
