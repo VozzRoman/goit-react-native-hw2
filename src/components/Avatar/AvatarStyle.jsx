@@ -4,7 +4,7 @@ export const avatarStyle = StyleSheet.create({
 	avatarBox: {
 		position: 'absolute',
 		top: -60,
-		left: "50%",
+		left: "53%",
 		width: 120,
 		height: 120,
 		borderColor: 'black',

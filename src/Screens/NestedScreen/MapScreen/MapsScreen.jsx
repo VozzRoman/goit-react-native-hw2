@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { Marker } from 'react-native-maps';
 import { mapStyle } from './MapScreenStyled';
 import MapView from 'react-native-maps';

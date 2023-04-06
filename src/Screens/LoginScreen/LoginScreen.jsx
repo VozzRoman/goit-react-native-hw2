@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import MainButton from "../../components/Buttons/MainButton/MainButton";
 import { authSignInUser } from "../../redux/auth/authOperations";
 import { formStyles } from "../RegistrationScreen/FormsStyle";
-// import { useHeaderHeight } from '@react-navigation/elements';
+
 
 const initialState = {
   email: "",
@@ -67,10 +67,6 @@ const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 			stateUpdater('');
 		}, 2500);
 	}
-	
-	
-	
-	
 	  const isValidForm = () => {
 		if(!isValidObject(value)) 
 		return updateError('Required all fields!', setError)
@@ -79,7 +75,6 @@ const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 		return updateError('Password must have 6 or more digits', setError)
 		return true;
 	  }
-	
 	
 	  //----------------------validation---------------------------//
 

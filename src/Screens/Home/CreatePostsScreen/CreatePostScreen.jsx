@@ -1,4 +1,4 @@
-import React, { Children, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { View, Text, Image } from "react-native";
 import { TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import { TextInput } from "react-native-paper";
@@ -13,14 +13,13 @@ import * as Location from "expo-location";
 import { uuidv4 } from "@firebase/util";
 //----fireBase
 import db from "../../../firebase/config";
-import { getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
 import { useSelector } from "react-redux";
 const storage = getStorage(db);
 const fierStore = getFirestore(db);
-console.log(fierStore);
-// import { async } from '@firebase/util';
+// console.log(fierStore);
 
 const initialValue = {
   name: "",
@@ -28,23 +27,20 @@ const initialValue = {
 };
 
 const CreatePostScreen = ({ navigation }) => {
-  // const [hasCameraPermission, sethasCameraPermission] = useState(null);
   const [showKeyboard, setShowKeyboard] = useState(false);
   const [hasPermission, setHasPermission] = useState(null);
   const [isCameraReady, setIsCameraReady] = useState(false);
   const [type, setType] = useState(Camera.Constants.Type.back);
-  // const [cameraReady, setCameraReady] = useState(false);
+
   const [camera, setCamera] = useState(null);
   const [photo, setPhoto] = useState(null);
   const [value, setValue] = useState(initialValue);
   const [activeBth, setActiveBth] = useState(false);
   const [isLocation, setIsLocation] = useState(null);
- 
- 
 
-  const user = useSelector(state => state);
-  console.log(user.auth.login);
-  console.log(user.auth.userId);
+  const user = useSelector((state) => state);
+  //   console.log(user.auth.login);
+  //   console.log(user.auth.userId);
 
   useEffect(() => {
     (async () => {
@@ -74,9 +70,9 @@ const CreatePostScreen = ({ navigation }) => {
   const handleTakePhoto = async () => {
     try {
       const snapPhoto = await camera.takePictureAsync();
-      console.log("myPhoto", snapPhoto.uri);
+      // console.log("myPhoto", snapPhoto.uri);
       const loaction = await Location.getCurrentPositionAsync();
-      console.log("location", loaction);
+      // console.log("location", loaction);
       setPhoto(snapPhoto.uri);
       setIsLocation(loaction);
       setActiveBth(true);
@@ -99,12 +95,10 @@ const CreatePostScreen = ({ navigation }) => {
   };
 
   const sendPhoto = () => {
-	createData();
-    console.log(navigation);
-    navigation.navigate("DeafultScreen", {
-		
-	 });
-    console.log(value);
+    createData();
+   //  console.log(navigation);
+    navigation.navigate("DeafultScreen", {});
+   //  console.log(value);
 
     setValue(initialValue);
   };
@@ -112,29 +106,25 @@ const CreatePostScreen = ({ navigation }) => {
     setShowKeyboard(true);
   };
 
-
   //-----Создание обьекта и загрузка его на сервер-----//
 
   const createData = async () => {
-	const photoFromServer = await uploadPhotToServer();
-	
-		try{
-	
-			await addDoc(collection(fierStore, 'posts'),{
-				photo: photoFromServer,
-				name: value.name,
-				place: value.place,
-				location: isLocation.coords,
-				userName: user.auth.login,
-				idUser: user.auth.userId,
-				
-			})
-			
-		} catch (e) {
-			console.error('Error adding object', e);
-		}
-		
-  }
+    const photoFromServer = await uploadPhotToServer();
+
+    try {
+      await addDoc(collection(fierStore, "posts"), {
+        photo: photoFromServer,
+        name: value.name,
+        place: value.place,
+        location: isLocation.coords,
+        userName: user.auth.login,
+        idUser: user.auth.userId,
+		  avaImg : user.auth.avatarImage,
+      });
+    } catch (e) {
+      console.error("Error adding object", e);
+    }
+  };
 
   //-----Загрузка фото на серевер-----//
 
@@ -159,8 +149,8 @@ const CreatePostScreen = ({ navigation }) => {
     const pathPhotoReference = await getDownloadURL(
       ref(storage, `picture/${postId}`)
     );
-    console.log(pathPhotoReference);
-	 return pathPhotoReference; //возврощяем фото для создания обьекта
+   //  console.log(pathPhotoReference);
+    return pathPhotoReference; //возврощяем фото для создания обьекта
   };
 
   return (
@@ -202,12 +192,7 @@ const CreatePostScreen = ({ navigation }) => {
           {/* //Фото окно с выбором камеры */}
 
           <TouchableOpacity activeOpacity={0.6}>
-            <Text
-              style={createPostScreenStyle.loadBth}
-              
-            >
-              Загрузите фото
-            </Text>
+            <Text style={createPostScreenStyle.loadBth}>Загрузите фото</Text>
           </TouchableOpacity>
           <View style={createPostScreenStyle.labelInput}>
             <TextInput
