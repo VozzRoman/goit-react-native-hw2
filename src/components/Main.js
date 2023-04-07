@@ -2,11 +2,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useRoute } from "../utils/routing";
 
 
-import { useEffect} from "react";
+import { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authStateChangeUser } from "../redux/auth/authOperations";
+import { onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import db from '../firebase/config';
 
 export const Main = () => {
+
+
   const dispatch = useDispatch();
   const ReducX_State = useSelector((state) => state);
   console.log("Redux-State====>", ReducX_State);
@@ -15,7 +20,7 @@ export const Main = () => {
 
   useEffect(() => {
     dispatch(authStateChangeUser());
-  }, [state]);
+  }, []);
 
   const routing = useRoute(state);
 

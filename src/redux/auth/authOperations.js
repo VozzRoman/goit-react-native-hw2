@@ -67,6 +67,8 @@ export const authSignInUser =
       alert(`Sorry but ${email} user dose not exist`);
     }
   };
+
+//--------------------------------------------------------------------
 export const authStateChangeUser = () => async (dispatch, state) => {
 	
   try {
@@ -96,6 +98,8 @@ export const authStateChangeUser = () => async (dispatch, state) => {
     console.log(e.message);
   }
 };
+//----------------------------------------------------------------------
+
 
 export const singOutUser = () => async (dispatch, state) => {
   try {
